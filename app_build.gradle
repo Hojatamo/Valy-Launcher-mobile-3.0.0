@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.valy.launcher'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.valy.launcher'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '3.0.0'
+    }
+
+    signingConfigs {
+        valy {
+            storeFile file('../valy.jks')
+            storePassword 'valylauncher'
+            keyAlias 'valy'
+            keyPassword 'valylauncher'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.valy
+        }
+        debug {
+            signingConfig signingConfigs.valy
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.8.0'
+}
